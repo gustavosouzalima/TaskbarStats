@@ -3,7 +3,7 @@ using System.Text;
 
 namespace TaskbarStats;
 
-/// <summary>Uso total de CPU via PDH (mesmo contador do Gerenciador de Tarefas).</summary>
+/// <summary>Uso total de CPU via PDH (mesmo cálculo do Gerenciador de Tarefas).</summary>
 sealed class CpuSensor : IDisposable
 {
     const uint PDH_FMT_DOUBLE = 0x00000200;
@@ -15,7 +15,9 @@ sealed class CpuSensor : IDisposable
     public CpuSensor()
     {
         if (PdhOpenQueryW(null, IntPtr.Zero, out query) != 0) { query = IntPtr.Zero; return; }
-        if (PdhAddEnglishCounterW(query, @"\Processor Information(_Total)\% Processor Utility", IntPtr.Zero, out counter) != 0 &&
+        // O Gerenciador de Tarefas do Windows 11 (24H2+, atualização de 2025) usa "% Processor Time".
+        // "% Processor Utility" (escala por clock/turbo) só aparece na coluna opcional "CPU Utility" em Detalhes.
+        if (PdhAddEnglishCounterW(query, @"\Processor Information(_Total)\% Processor Time", IntPtr.Zero, out counter) != 0 &&
             PdhAddEnglishCounterW(query, @"\Processor(_Total)\% Processor Time", IntPtr.Zero, out counter) != 0)
         {
             PdhCloseQuery(query);

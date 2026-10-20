@@ -58,7 +58,7 @@ sealed class StatsForm : Form
         StartPosition = FormStartPosition.Manual;
         TopMost = true;
         DoubleBuffered = true;
-        Font = new Font("Segoe UI", 9f, FontStyle.Regular, GraphicsUnit.Point);
+        Font = new Font("Segoe UI", 8.5f, FontStyle.Regular, GraphicsUnit.Point);
         BackColor = Color.FromArgb(32, 32, 32);
 
         startupItem = new ToolStripMenuItem("Iniciar com o Windows", null, (_, _) => ToggleStartup()) { Checked = IsStartupEnabled() };
@@ -163,9 +163,9 @@ sealed class StatsForm : Form
         valueW = Math.Max(M("100%").Width, M("100°C").Width);
         lineH = M("CPU 0%").Height;
         float scale = DeviceDpi / 96f;
-        pad = (int)(6 * scale);
-        colGap = (int)(12 * scale);
-        int gap = (int)(4 * scale);
+        pad = (int)(3 * scale);
+        colGap = (int)(8 * scale);
+        int gap = (int)(3 * scale);
         labelW += gap;
         Width = pad + labelW + valueW + colGap + labelW + valueW + pad;
     }

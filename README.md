@@ -9,7 +9,7 @@ RAM 41%       52°C                20/10/2026
 
 ## Recursos
 
-- CPU: mesmo contador do Gerenciador de Tarefas (`% Processor Utility`, via PDH).
+- CPU: mesmo contador do Gerenciador de Tarefas do Windows 11 atual (`% Processor Time`, via PDH).
 - RAM: "Em uso" como no Gerenciador de Tarefas: (total − disponível) / total (`GlobalMemoryStatusEx`).
 - GPU: uso calculado como o Gerenciador de Tarefas (contadores `GPU Engine`: soma dos processos por motor, mostra o motor mais ocupado).
 - GPU NVIDIA: temperatura e VRAM via NVML (`nvml.dll`, instalado com o driver).
@@ -129,7 +129,7 @@ Passos:
 
 | Item | Fonte | Precisa de admin? |
 |---|---|---|
-| CPU | PDH `\Processor Information(_Total)\% Processor Utility` | não |
+| CPU | PDH `\Processor Information(_Total)\% Processor Time` | não |
 | RAM | `GlobalMemoryStatusEx` | não |
 | GPU uso | PDH `\GPU Engine(*)\Utilization Percentage` (mesma fonte do Gerenciador) | não |
 | GPU temp / VRAM | NVML (`C:\Windows\System32\nvml.dll`) | não |
